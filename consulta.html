@@ -1,0 +1,177 @@
+<html>
+	<head>
+    <meta charset="utf-8" />
+		<title>Orçamento pessoal</title>
+
+		<!-- Bootstrap início -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Bootstrap fim -->
+
+    <!-- Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <script src="https://kit.fontawesome.com/97b5838e50.js" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+	</head>
+
+  <body onload="insereDespesas()" style="height: 100vh;">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark  mb-5" style="background-color: #2FD929;">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+           <img src="logo.png" width="50" height="35" alt="Orçamento pessoal">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Cadastro</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="consulta.html">Consulta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="balanco.html">Balanço</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col" style="text-align: center;">
+          <h1 class="display-4">Consulta de despesas</h1>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-md-2">
+          <select class="form-control" id="ano" style="background-color: #D9D9D9;">
+            <option value="">Ano</option>
+            <option value="2023">2023</option>
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <select class="form-control" id="mes" style="background-color: #D9D9D9;">
+            <option value="">Mês</option>
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+          </select>
+        </div>
+        
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Dia" id="dia" style="background-color: #D9D9D9;" />
+        </div>
+
+        <div class="col-md-6">
+          <select class="form-control" id="tipo" style="background-color: #D9D9D9;">
+            <option value="">Tipo</option>
+            <option value="1">Alimentação</option>
+            <option value="2">Educação</option>
+            <option value="3">Lazer</option>
+            <option value="4">Saúde</option>
+            <option value="5">Transporte</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row  mb-5">
+        <div class="col-md-8">
+          <input type="text" class="form-control" placeholder="Descrição" id="descricao" style="background-color: #D9D9D9;" />
+        </div>
+
+        <div class="col-md-2">
+          <input type="text" class="form-control" placeholder="Valor" id="valor" style="background-color: #D9D9D9;" />
+        </div>
+
+        <div class="col-md-2 d-flex justify-content-end">
+          <button type="button" class="btn btn-success" onclick="pesquisarDespesaClick()">
+            <i class="fas fa-search"></i>
+            
+           
+          </button>
+        </div>
+      </div>
+
+      <div class="row" style="background-color: #D9D9D9;">
+        <div class="col">
+          <table class="table" >
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody id="tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+        <!-- Modal Sucesso -->
+<div class="modal fade" id="modalRegistraDespesa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-success">
+        <h5 class="modal-title" id="exampleModalLabel">Despesas inseridas com sucesso. </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div   class="modal-body">
+       Todas as Despesas foram Inseridas com sucesso!
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="button"  data-dismiss="modal" onclick="eventoCarrergaPagina()">OK</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="" style="width: 100%; position:relative;bottom: 0; top: 30%; display: flex; justify-content: space-around; align-items: center; background-color: #2FD929;">
+  <span style="text-align: center; font-size: 19px;">Desenvolvido Por Guilherme Sposito &copy; 28/06/2023</span>
+  <div style="font-size: 30px;">
+    <a href="https://github.com/GuilhermeSposito"><i class="fa-brands fa-github" style="color: rgb(0, 0, 0);"></i></a>
+    <a href="https://www.instagram.com/spositojj/"><i class="fa-brands fa-instagram" style="color: rgb(0, 0, 0);"></i></a>
+    <a href="https://api.whatsapp.com/send?phone=5516992366175&text=Ol%C3%A1%20vi%20seu%20site%20e%20se%20interessei%20pelo%20seu%20trabalho,%20Tudo%20bem%20?+"><i class="fa-brands fa-whatsapp" style="color: rgb(0, 0, 0);"></i></a>
+    <a href="https://www.facebook.com/gui.spositoo"><i class="fa-brands fa-facebook" style="color: rgb(0, 0, 0);"></i></a>
+  </div>
+
+ </footer>
+
+
+    <script src="java.js"></script>
+      
+
+  </body>	
+
+</html>
